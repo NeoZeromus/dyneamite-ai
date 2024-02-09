@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/5.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
+import os
 
 from pathlib import Path
 
@@ -25,7 +26,7 @@ SECRET_KEY = 'django-insecure-q2a=_-+6ifr3(b$7@tp193@m-+$cqo%=r-6(ha96&bwhmeuo1b
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -76,9 +77,9 @@ WSGI_APPLICATION = 'mybackend.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'mydatabase',  # Replace with your database name
-        'USER': 'alex',  # Default PostgreSQL user
-        'PASSWORD': 'password',  # Replace with the password for the 'postgres' user
+        'NAME': 'postgres',  # Replace with your database name
+        'USER': 'postgres',  # Default PostgreSQL user
+        'PASSWORD': 'postgres',  # Replace with the password for the 'postgres' user
         'HOST': 'localhost',
         'PORT': '5432',
     }
