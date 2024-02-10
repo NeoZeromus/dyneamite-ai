@@ -2,7 +2,41 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
 
+from nltk.tokenize import word_tokenize
+
 from .serializers import MessageSerializer
+
+import nltk
+nltk.download('punkt')
+nltk.download('averaged_perceptron_tagger')
+
+conjunctions_and_connectors = [
+    "and",
+    "but",
+    "or",
+    "nor",
+    "yet",
+    "so",
+    "for",
+    "because",
+    "since",
+    "although",
+    "though",
+    "while",
+    "whereas",
+    "unless",
+    "until",
+    "therefore",
+    "hence",
+    "thus",
+    "furthermore",
+    "moreover",
+    "an",
+    "a",
+    "of",
+    "the",
+    "that"
+]
 
 @api_view(['GET'])
 def hello_world(request):
@@ -25,7 +59,18 @@ def echo(request):
 @api_view(['POST'])
 def create_post(request):
     if request.method == 'POST':
-        serializer = MessageSerializer(data=request.data)
+        requestData = request.data
+        
+        message = request.data['message']
+        
+        tokens = word_tokenize(message)
+        
+        tokens = [word for word in tokens if word not in conjunctions_and_connectors]
+        
+        requestData["tokens"] = tokens
+        
+        serializer = MessageSerializer(data=requestData)
+        
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
