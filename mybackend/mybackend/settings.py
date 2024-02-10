@@ -89,7 +89,7 @@ WSGI_APPLICATION = 'mybackend.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'dinamita',  # Replace with your database name
+        'NAME': 'postgres',  # Replace with your database name
         'USER': 'postgres',  # Default PostgreSQL user
         'PASSWORD': 'postgres',  # Replace with the password for the 'postgres' user
         'HOST': 'localhost',
