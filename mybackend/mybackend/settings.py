@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'dynamiteAPI',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -50,6 +51,15 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.security.SecurityMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+]
+
+CORS_ORIGIN_ALLOW_ALL = True
+
+CORS_ORIGIN_WHITELIST = [
+    '*',
 ]
 
 ROOT_URLCONF = 'mybackend.urls'
@@ -89,7 +99,7 @@ WSGI_APPLICATION = 'mybackend.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',  # Replace with your database name
+        'NAME': 'dinamita',  # Replace with your database name
         'USER': 'postgres',  # Default PostgreSQL user
         'PASSWORD': 'postgres',  # Replace with the password for the 'postgres' user
         'HOST': 'localhost',
