@@ -1,6 +1,7 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
+from django.views.decorators.csrf import csrf_exempt
 
 from nltk.tokenize import word_tokenize
 
@@ -57,6 +58,7 @@ def echo(request):
             # If 'message' key is not present in request data
             return Response({"error": "Message key not found in request data"}, status=status.HTTP_400_BAD_REQUEST)
         
+@csrf_exempt
 @api_view(['POST'])
 def create_post(request):
     if request.method == 'POST':
